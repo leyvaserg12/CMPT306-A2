@@ -1,16 +1,27 @@
-[gd_scene format=3 uid="uid://c0fkmthj120pe"]
+[gd_scene load_steps=6 format=3 uid="uid://c0fkmthj120pe"]
+
+[ext_resource type="Script" path="res://spaceship.gd" id="1_3n0jl"]
+[ext_resource type="Shader" path="res://main_scene.gdshader" id="1_8owv2"]
+[ext_resource type="Texture2D" uid="uid://dagt2brv1a5tc" path="res://spaceship.png" id="1_sa4rn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s1du8"]
+shader = ExtResource("1_8owv2")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_khvd2"]
+size = Vector2(207, 160)
 
 [node name="Main Scene" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_s1du8")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
 
 [node name="Name_ NSID" type="RichTextLabel" parent="CanvasLayer"]
 anchors_preset = 1
@@ -22,6 +33,18 @@ offset_bottom = 79.0
 grow_horizontal = 0
 text = "Serg Leyva
 DJK832"
+
+[node name="Spaceship" type="Node2D" parent="."]
+script = ExtResource("1_3n0jl")
+
+[node name="SpaceShipSprite" type="Sprite2D" parent="Spaceship"]
+texture = ExtResource("1_sa4rn")
+
+[node name="Area2D" type="Area2D" parent="Spaceship/SpaceShipSprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spaceship/SpaceShipSprite/Area2D"]
+position = Vector2(4.5, 4)
+shape = SubResource("RectangleShape2D_khvd2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1, 0)
