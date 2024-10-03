@@ -8,23 +8,28 @@ class_name Spaceship
 func _ready() -> void:
 	pass
 
-func _on_body_entered(body:Node2D) -> void:
-	print(body)
-	get_tree().change_scene_to_file("res://main_scene.tscn")
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	# left thruster animation
 	if Input.is_action_pressed("ui_left"):
 		get_node("SpaceshipSprite").play("rotateLeft")
+		
+	#right thruster animation
 	elif Input.is_action_pressed("ui_right"):
 		get_node("SpaceshipSprite").play("rotateRight")
+	
+	#idle animation
 	else:
 		get_node("SpaceshipSprite").play("Idle")
+		
+		
+	
 
 	
 func _physics_process(delta: float) -> void:
 	self.rotation -= 0.0
 	
+	# left/right arrows spaceship rotation
 	if Input.is_action_pressed("ui_left"):
 		self.rotation -= delta*move_speed
 	if Input.is_action_pressed("ui_right"):
