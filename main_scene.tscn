@@ -1,11 +1,51 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0fkmthj120pe"]
+[gd_scene load_steps=10 format=3 uid="uid://c0fkmthj120pe"]
 
 [ext_resource type="Script" path="res://spaceship.gd" id="1_3n0jl"]
 [ext_resource type="Shader" path="res://main_scene.gdshader" id="1_8owv2"]
-[ext_resource type="Texture2D" uid="uid://dagt2brv1a5tc" path="res://spaceship.png" id="1_sa4rn"]
+[ext_resource type="Texture2D" uid="uid://fqpdvjfk4083" path="res://rocket ship.png" id="3_i4wrp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s1du8"]
 shader = ExtResource("1_8owv2")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emx58"]
+atlas = ExtResource("3_i4wrp")
+region = Rect2(297, 96, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7yymh"]
+atlas = ExtResource("3_i4wrp")
+region = Rect2(396, 0, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igkkk"]
+atlas = ExtResource("3_i4wrp")
+region = Rect2(99, 0, 99, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n71ap"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emx58")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7yymh")
+}],
+"loop": true,
+"name": &"rotateLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igkkk")
+}],
+"loop": true,
+"name": &"rotateRight",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_khvd2"]
 size = Vector2(207, 166.141)
@@ -37,17 +77,19 @@ DJK832"
 [node name="Spaceship" type="Node2D" parent="."]
 script = ExtResource("1_3n0jl")
 
-[node name="SpaceShipSprite" type="Sprite2D" parent="Spaceship"]
+[node name="SpaceshipSprite" type="AnimatedSprite2D" parent="Spaceship"]
+texture_filter = 1
+texture_repeat = 1
 position = Vector2(-4.76837e-07, 1.00001)
-scale = Vector2(0.316919, 0.301829)
-texture = ExtResource("1_sa4rn")
+scale = Vector2(0.892, 0.85)
+sprite_frames = SubResource("SpriteFrames_n71ap")
+animation = &"rotateLeft"
 
-[node name="Area2D" type="Area2D" parent="Spaceship/SpaceShipSprite"]
+[node name="Area2D" type="Area2D" parent="Spaceship/SpaceshipSprite"]
 position = Vector2(1.18327, 5.79798)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Spaceship/SpaceShipSprite/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spaceship/SpaceshipSprite/Area2D"]
 position = Vector2(-1.18323, -2.7273)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_khvd2")
 
 [node name="Camera2D" type="Camera2D" parent="."]

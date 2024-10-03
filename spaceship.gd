@@ -1,9 +1,12 @@
 extends Node2D
 class_name Spaceship
-@export var move_speed = 5.0
+
+@export var move_speed := 5.0
+
+@export var AnimatedSprite : AnimatedSprite2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$SpaceShipSprite/Area2D.body_entered.connect(_on_body_entered)
+	pass
 
 func _on_body_entered(body:Node2D) -> void:
 	print(body)
@@ -11,7 +14,13 @@ func _on_body_entered(body:Node2D) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_pressed("ui_left"):
+		get_node("SpaceshipSprite").play("rotateLeft")
+	elif Input.is_action_pressed("ui_right"):
+		get_node("SpaceshipSprite").play("rotateRight")
+	else:
+		get_node("SpaceshipSprite").play("Idle")
+
 	
 func _physics_process(delta: float) -> void:
 	self.rotation -= 0.0
@@ -20,3 +29,4 @@ func _physics_process(delta: float) -> void:
 		self.rotation -= delta*move_speed
 	if Input.is_action_pressed("ui_right"):
 		self.rotation += delta*move_speed
+	pass
