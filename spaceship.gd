@@ -12,19 +12,17 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# left thruster animation
 	if Input.is_action_pressed("ui_left"):
-		get_node("SpaceshipSprite").play("rotateLeft")
+		AnimatedSprite.play("rotateLeft")
 		
 	#right thruster animation
 	elif Input.is_action_pressed("ui_right"):
-		get_node("SpaceshipSprite").play("rotateRight")
+		AnimatedSprite.play("rotateRight")
 	
 	#idle animation
 	else:
-		get_node("SpaceshipSprite").play("Idle")
-		
+		AnimatedSprite.play("Idle")
 		
 	
-
 	
 func _physics_process(delta: float) -> void:
 	self.rotation -= 0.0
