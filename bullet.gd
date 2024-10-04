@@ -11,12 +11,16 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_select"):
-		get_node("BulletSprite").play("bulletAnimation")
-		
-	else:
-		get_node("BulletSprite").play("Idle")
+	
+	# bullet animation
 	pass
 	
 func _physics_process(delta: float) -> void:
+	
+	# use self.queue_free() to remove the current instantiation
+	# when the bullet hits something ?
+	if Input.is_action_just_pressed("ui_select"):
+		get_node("BulletSprite").play("bulletAnimation") 
+		self.queue_free()
+	
 	pass
