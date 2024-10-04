@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djiyx0c115mbo"
-path="res://.godot/imported/parallax-space-stars.png-cb2d0e01b2ebab9f78a1e60ec0a5d699.ctex"
+uid="uid://c88y8agexfhyg"
+path="res://.godot/imported/rocket ship.png-bfda71821d40bacb155931a24cd64536.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://layers/parallax-space-stars.png"
-dest_files=["res://.godot/imported/parallax-space-stars.png-cb2d0e01b2ebab9f78a1e60ec0a5d699.ctex"]
+source_file="res://sprites/rocket ship.png"
+dest_files=["res://.godot/imported/rocket ship.png-bfda71821d40bacb155931a24cd64536.ctex"]
 
 [params]
 

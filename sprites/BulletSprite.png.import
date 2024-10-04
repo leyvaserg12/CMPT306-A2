@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yl86sgkxln3n"
-path="res://.godot/imported/parallax-space-ring-planet.png-80ba85e808e581f65473ea286e56d250.ctex"
+uid="uid://bl42t6o87l14m"
+path="res://.godot/imported/BulletSprite.png-07890ad9051e145ab447b40773db1ac5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://layers/parallax-space-ring-planet.png"
-dest_files=["res://.godot/imported/parallax-space-ring-planet.png-80ba85e808e581f65473ea286e56d250.ctex"]
+source_file="res://sprites/BulletSprite.png"
+dest_files=["res://.godot/imported/BulletSprite.png-07890ad9051e145ab447b40773db1ac5.ctex"]
 
 [params]
 

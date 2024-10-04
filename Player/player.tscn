@@ -1,0 +1,94 @@
+[gd_scene load_steps=12 format=3 uid="uid://bsx41lqnt5iiq"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_pdtdn"]
+[ext_resource type="Texture2D" uid="uid://c88y8agexfhyg" path="res://sprites/rocket ship.png" id="2_8bl1m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0h108"]
+size = Vector2(66.1435, 57.6471)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emx58"]
+atlas = ExtResource("2_8bl1m")
+region = Rect2(297, 96, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sx3be"]
+atlas = ExtResource("2_8bl1m")
+region = Rect2(396, 768, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dk24x"]
+atlas = ExtResource("2_8bl1m")
+region = Rect2(396, 0, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70os6"]
+atlas = ExtResource("2_8bl1m")
+region = Rect2(396, 384, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqubm"]
+atlas = ExtResource("2_8bl1m")
+region = Rect2(99, 768, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_igkkk"]
+atlas = ExtResource("2_8bl1m")
+region = Rect2(99, 0, 99, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n2wn7"]
+atlas = ExtResource("2_8bl1m")
+region = Rect2(99, 384, 99, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n71ap"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emx58")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx3be")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dk24x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70os6")
+}],
+"loop": true,
+"name": &"rotateLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqubm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_igkkk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n2wn7")
+}],
+"loop": true,
+"name": &"rotateRight",
+"speed": 5.0
+}]
+
+[node name="Spaceship" type="CharacterBody2D" node_paths=PackedStringArray("AnimatedSprite")]
+script = ExtResource("1_pdtdn")
+AnimatedSprite = NodePath("SpaceshipSprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, 0.5)
+scale = Vector2(0.892, 0.85)
+shape = SubResource("RectangleShape2D_0h108")
+
+[node name="SpaceshipSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(-3, -2)
+scale = Vector2(0.892, 0.85)
+sprite_frames = SubResource("SpriteFrames_n71ap")
+animation = &"rotateLeft"
+
+[node name="bulletPos" type="Node2D" parent="."]
+position = Vector2(50, 0)

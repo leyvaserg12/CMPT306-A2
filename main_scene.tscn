@@ -1,118 +1,36 @@
-[gd_scene load_steps=15 format=3 uid="uid://c0fkmthj120pe"]
+[gd_scene load_steps=4 format=3 uid="uid://c0fkmthj120pe"]
 
-[ext_resource type="Script" path="res://spaceship.gd" id="1_3n0jl"]
-[ext_resource type="PackedScene" uid="uid://bvcukocpaobp2" path="res://background.tscn" id="1_7qvoj"]
-[ext_resource type="Texture2D" uid="uid://c88y8agexfhyg" path="res://rocket ship.png" id="3_i4wrp"]
-[ext_resource type="PackedScene" uid="uid://c4gfw4wf1wwp4" path="res://bullet.tscn" id="4_g4g3r"]
+[ext_resource type="Shader" path="res://main_scene.gdshader" id="1_8owv2"]
+[ext_resource type="PackedScene" uid="uid://bsx41lqnt5iiq" path="res://Player/player.tscn" id="2_7t5gq"]
 
-[sub_resource type="GDScript" id="GDScript_okjdq"]
-script/source = "extends ParallaxBackground
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	scroll_base_offset.x -= 40*delta
-"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_emx58"]
-atlas = ExtResource("3_i4wrp")
-region = Rect2(297, 96, 99, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sx3be"]
-atlas = ExtResource("3_i4wrp")
-region = Rect2(396, 768, 99, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dk24x"]
-atlas = ExtResource("3_i4wrp")
-region = Rect2(396, 0, 99, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_70os6"]
-atlas = ExtResource("3_i4wrp")
-region = Rect2(396, 384, 99, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cqubm"]
-atlas = ExtResource("3_i4wrp")
-region = Rect2(99, 768, 99, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_igkkk"]
-atlas = ExtResource("3_i4wrp")
-region = Rect2(99, 0, 99, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n2wn7"]
-atlas = ExtResource("3_i4wrp")
-region = Rect2(99, 384, 99, 96)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_n71ap"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_emx58")
-}],
-"loop": false,
-"name": &"Idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sx3be")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dk24x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_70os6")
-}],
-"loop": true,
-"name": &"rotateLeft",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cqubm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_igkkk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n2wn7")
-}],
-"loop": true,
-"name": &"rotateRight",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_khvd2"]
-size = Vector2(207, 166.141)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_77xs2"]
+shader = ExtResource("1_8owv2")
 
 [node name="Main Scene" type="Node2D"]
 
-[node name="Background" parent="." instance=ExtResource("1_7qvoj")]
-script = SubResource("GDScript_okjdq")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
 
-[node name="Spaceship" type="Node2D" parent="."]
-script = ExtResource("1_3n0jl")
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_77xs2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="SpaceshipSprite" type="AnimatedSprite2D" parent="Spaceship"]
-texture_filter = 1
-texture_repeat = 1
-position = Vector2(1, 1.00001)
-scale = Vector2(0.892, 0.85)
-sprite_frames = SubResource("SpriteFrames_n71ap")
-animation = &"rotateLeft"
+[node name="Name_ NSID" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -184.0
+offset_top = 36.0
+offset_right = -70.0
+offset_bottom = 93.0
+grow_horizontal = 0
+text = "Serg Leyva
+DJK832"
 
-[node name="Area2D" type="Area2D" parent="Spaceship/SpaceshipSprite"]
-position = Vector2(1.18327, 5.79798)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Spaceship/SpaceshipSprite/Area2D"]
-position = Vector2(-1.18323, -2.7273)
-shape = SubResource("RectangleShape2D_khvd2")
+[node name="Player" parent="." instance=ExtResource("2_7t5gq")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-enabled = false
-
-[node name="Bullet" parent="." instance=ExtResource("4_g4g3r")]
