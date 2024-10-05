@@ -11,9 +11,16 @@ config_version=5
 [application]
 
 config/name="Assignment2"
-run/main_scene="res://main_scene.tscn"
+run/main_scene="res://Game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://sprites/icon.svg"
+
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="player"
+2d_physics/layer_3="aesteroids"
+2d_physics/layer_4="bullet"
 
 [rendering]
 

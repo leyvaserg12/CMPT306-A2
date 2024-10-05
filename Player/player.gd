@@ -1,23 +1,29 @@
 extends CharacterBody2D
-class_name Spaceship
+class_name Player
 
-@onready var bullet = load("res://Player/bullet.tscn")
-@onready var main = get_tree().get_root().get_node("Main Scene")
-@export var bullet_speed = 1000
+signal bullet_fired(bullet)
+
 @export var move_speed := 5.0
 @export var AnimatedSprite : AnimatedSprite2D
+@onready var bulletPos = $bulletPos
+
+var bullet_scene = preload("res://Player/bullet.tscn")
+var cooldown = false
+var fire_rate = 0.3
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	shoot()
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-	if Input.is_action_pressed("ui_select"):
+	# bullet shooting 
+	if Input.is_action_pressed("ui_select") and !cooldown:
+		cooldown = true
 		shoot()
-		
-		
+		await get_tree().create_timer(fire_rate).timeout
+		cooldown = false
 	# left thruster animation
 	if Input.is_action_pressed("ui_left"):
 		AnimatedSprite.play("rotateLeft")
@@ -29,8 +35,8 @@ func _process(delta: float) -> void:
 	#idle animation
 	else:
 		AnimatedSprite.play("Idle")
-		
 	
+ 	
 	
 func _physics_process(delta: float) -> void:
 	self.rotation -= 0.0
@@ -42,11 +48,10 @@ func _physics_process(delta: float) -> void:
 		self.rotation += delta*move_speed
 	pass
 	
+
 func shoot():
-	var bullet_instance = bullet.instantiate()
-	bullet_instance.position = $bulletPos.get_global_position()
-	bullet_instance.rotation_degrees = rotation
-	bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(rotation))
-	get_tree().get_root().add_child(bullet_instance)
+	var bullet = bullet_scene.instantiate()
+	bullet.global_position = bulletPos.global_position
+	bullet.rotation = rotation
 	
-	
+	emit_signal("bullet_fired", bullet)

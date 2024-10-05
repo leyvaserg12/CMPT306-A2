@@ -1,31 +1,43 @@
-[gd_scene load_steps=5 format=3 uid="uid://cof5apn2ea5b7"]
+[gd_scene load_steps=6 format=3 uid="uid://p3udy7hjc1sd"]
 
+[ext_resource type="Script" path="res://Player/bullet.gd" id="1_ktex8"]
 [ext_resource type="Texture2D" uid="uid://bl42t6o87l14m" path="res://sprites/BulletSprite.png" id="1_l1rcb"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qa6km"]
-atlas = ExtResource("1_l1rcb")
-region = Rect2(576, 200, 32, 20)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7eb5x"]
+radius = 7.0
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ihkn3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_snnx1"]
+atlas = ExtResource("1_l1rcb")
+region = Rect2(544, 200, 32, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a48xk"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qa6km")
+"texture": SubResource("AtlasTexture_snnx1")
 }],
 "loop": true,
-"name": &"bullet",
+"name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_rx5oj"]
-radius = 9.05539
-
-[node name="Bullet" type="RigidBody2D"]
-
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_ihkn3")
-animation = &"bullet"
+[node name="bullet" type="Area2D"]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_ktex8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(6, -1)
-shape = SubResource("CircleShape2D_rx5oj")
+position = Vector2(0, -17)
+shape = SubResource("CapsuleShape2D_7eb5x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.53033, -16)
+rotation = 4.71239
+scale = Vector2(1, 1.05303)
+sprite_frames = SubResource("SpriteFrames_a48xk")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-0.5, -16)
+scale = Vector2(0.75, 1.4)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
