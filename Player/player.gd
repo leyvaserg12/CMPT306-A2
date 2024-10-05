@@ -2,6 +2,7 @@ extends RigidBody2D
 class_name Player
 
 signal bullet_fired(bullet)
+signal died
 
 @export var move_speed := 1000.0
 @export var recoil := 100
@@ -70,3 +71,4 @@ func warp():
 	
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	warp()
+	

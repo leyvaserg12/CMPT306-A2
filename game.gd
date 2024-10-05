@@ -13,6 +13,7 @@ var score := 0:
 		score = value
 		hud.score = score
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	score = 0
@@ -47,10 +48,8 @@ func spawnAsteroid(position, size):
 	asteroid.connect("exploded", _on_asteroid_exploded)
 	asteroidContainer.add_child(asteroid)
 	
-func _process(delta: float) -> void:
-	if asteroidContainer.get_child_count() < 3:
-		spawnAsteroid(position, Asteroid.asteroid_size.large)
-		
+
+
 	
 		
 		
