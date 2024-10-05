@@ -38,8 +38,7 @@ func _process(delta: float) -> void:
 	#idle animation
 	else:
 		AnimatedSprite.play("Idle")
-	
- 	
+		
 	
 func _physics_process(delta: float) -> void:
 	
@@ -50,7 +49,6 @@ func _physics_process(delta: float) -> void:
 		apply_torque(move_speed)
 	
 	
-	
 
 func shoot():
 	var bullet = bullet_scene.instantiate()
@@ -59,3 +57,16 @@ func shoot():
 	apply_central_impulse(Vector2.DOWN.rotated(rotation) * recoil)
 	
 	emit_signal("bullet_fired", bullet)
+
+# keeps player in screen view
+func warp():
+	var prev_pos = position
+	var screen_bounds : Vector2 = get_viewport_rect().size / 2.0
+	var new_pos = position
+	
+	new_pos.x = wrapf(new_pos.x, -screen_bounds.x, screen_bounds.x)
+	new_pos.y = wrapf(new_pos.y, -screen_bounds.y, screen_bounds.y)
+	position = new_pos
+	
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	warp()

@@ -1,15 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0fkmthj120pe"]
+[gd_scene load_steps=7 format=3 uid="uid://c0fkmthj120pe"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_8edvt"]
 [ext_resource type="Shader" path="res://main_scene.gdshader" id="2_i3vkv"]
 [ext_resource type="PackedScene" uid="uid://bsx41lqnt5iiq" path="res://Player/player.tscn" id="3_trp35"]
 [ext_resource type="PackedScene" uid="uid://in36o7mq1daq" path="res://scenes/aesteroid.tscn" id="4_rpwgj"]
+[ext_resource type="PackedScene" uid="uid://c6fwi18krb7cj" path="res://hud.tscn" id="5_m2tex"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_77xs2"]
 shader = ExtResource("2_i3vkv")
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_8edvt")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+ignore_rotation = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -37,18 +41,24 @@ DJK832"
 [node name="Player" parent="." instance=ExtResource("3_trp35")]
 position = Vector2(-1, 0)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="bulletContainers" type="Node" parent="."]
 
 [node name="AsteroidContainer" type="Node" parent="."]
+
+[node name="aesteroid5" parent="AsteroidContainer" instance=ExtResource("4_rpwgj")]
+position = Vector2(424, 180)
+size = 0
 
 [node name="aesteroid3" parent="AsteroidContainer" instance=ExtResource("4_rpwgj")]
 position = Vector2(116, 46)
 size = 0
 
-[node name="aesteroid3" parent="AsteroidContainer/aesteroid3" instance=ExtResource("4_rpwgj")]
-position = Vector2(308, 134)
+[node name="aesteroid6" parent="AsteroidContainer" instance=ExtResource("4_rpwgj")]
+position = Vector2(424, 180)
+size = 0
+
+[node name="aesteroid4" parent="AsteroidContainer" instance=ExtResource("4_rpwgj")]
+position = Vector2(116, 46)
 size = 0
 
 [node name="aesteroid2" parent="AsteroidContainer" instance=ExtResource("4_rpwgj")]
@@ -58,3 +68,7 @@ size = 0
 [node name="aesteroid" parent="AsteroidContainer" instance=ExtResource("4_rpwgj")]
 position = Vector2(370, 60)
 size = 0
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="UI" instance=ExtResource("5_m2tex")]
