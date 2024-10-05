@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c88y8agexfhyg" path="res://sprites/rocket ship.png" id="2_8bl1m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0h108"]
-size = Vector2(68.3857, 67.0588)
+size = Vector2(44.843, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_emx58"]
 atlas = ExtResource("2_8bl1m")
@@ -73,14 +73,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimatedSprite")]
+[node name="Player" type="RigidBody2D" node_paths=PackedStringArray("AnimatedSprite")]
 collision_layer = 2
 collision_mask = 5
+gravity_scale = 0.0
 script = ExtResource("1_pdtdn")
 AnimatedSprite = NodePath("SpaceshipSprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.49999, -3.5)
+position = Vector2(0.499999, -9)
 rotation = -1.5708
 scale = Vector2(0.892, 0.85)
 shape = SubResource("RectangleShape2D_0h108")
@@ -89,7 +90,7 @@ shape = SubResource("RectangleShape2D_0h108")
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(-3, -2)
-rotation = 4.71239
+rotation = -1.5708
 scale = Vector2(0.892, 0.85)
 sprite_frames = SubResource("SpriteFrames_n71ap")
 animation = &"rotateLeft"

@@ -1,9 +1,10 @@
-extends CharacterBody2D
+extends RigidBody2D
 class_name Player
 
 signal bullet_fired(bullet)
 
-@export var move_speed := 5.0
+@export var move_speed := 1000.0
+@export var recoil := 100
 @export var AnimatedSprite : AnimatedSprite2D
 @onready var bulletPos = $bulletPos
 
@@ -20,10 +21,12 @@ func _process(delta: float) -> void:
 	
 	# bullet shooting 
 	if Input.is_action_pressed("ui_select") and !cooldown:
+		
 		cooldown = true
 		shoot()
 		await get_tree().create_timer(fire_rate).timeout
 		cooldown = false
+		
 	# left thruster animation
 	if Input.is_action_pressed("ui_left"):
 		AnimatedSprite.play("rotateLeft")
@@ -39,19 +42,20 @@ func _process(delta: float) -> void:
  	
 	
 func _physics_process(delta: float) -> void:
-	self.rotation -= 0.0
 	
 	# left/right arrows spaceship rotation
 	if Input.is_action_pressed("ui_left"):
-		self.rotation -= delta*move_speed
+		apply_torque(-move_speed)
 	if Input.is_action_pressed("ui_right"):
-		self.rotation += delta*move_speed
-	pass
+		apply_torque(move_speed)
+	
+	
 	
 
 func shoot():
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = bulletPos.global_position
 	bullet.rotation = rotation
+	apply_central_impulse(Vector2.DOWN.rotated(rotation) * recoil)
 	
 	emit_signal("bullet_fired", bullet)
